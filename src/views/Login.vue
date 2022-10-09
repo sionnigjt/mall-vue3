@@ -1,118 +1,202 @@
 <template>
-  <div class="login-body">
-    <div class="login-container">
-      <div class="head">
-        <img class="logo" src="https://s.yezgea02.com/1582958061265/mlogo.png" />
-        <div class="name">
-          <div class="title">新蜂商城</div>
-          <div class="tips">Vue3.0 后台管理系统</div>
+  <div class="login">
+    <!-- <s-header :name="type == 'login' ? '登录' : '注册'" :back="'/home'"></s-header> -->
+    <img
+      class="logo"
+      src="https://s.yezgea02.com/1604045825972/newbee-mall-vue3-app-logo.png"
+      alt=""
+    />
+    <div v-if="state.type == 'login'" class="login-body login">
+      <van-form @submit="onSubmit">
+        <van-field
+          v-model="state.username"
+          name="username"
+          label="用户名"
+          placeholder="用户名"
+          :rules="[{ required: true, message: '请填写用户名' }]"
+        />
+        <van-field
+          v-model="state.password"
+          type="password"
+          name="password"
+          label="密码"
+          placeholder="密码"
+          :rules="[{ required: true, message: '请填写密码' }]"
+        />
+        <van-field
+          center
+          clearable
+          label="验证码"
+          placeholder="输入验证码"
+          v-model="state.verify"
+        >
+          <template #button>
+            <vue-img-verify ref="verifyRef" />
+          </template>
+        </van-field>
+        <div style="margin: 16px">
+          <div class="link-register" @click="toggle('register')">立即注册</div>
+          <van-button round block color="#1baeae" native-type="submit"
+            >登录</van-button
+          >
         </div>
-      </div>
-      <el-form label-position="top" :rules="state.rules" :model="state.ruleForm" ref="loginForm" class="login-form">
-        <el-form-item label="账号" prop="username">
-          <el-input type="text" v-model.trim="state.ruleForm.username" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model.trim="state.ruleForm.password" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <div style="color: #333">登录表示您已同意<a>《服务条款》</a></div>
-          <el-button style="width: 100%" type="primary" @click="submitForm">立即登录</el-button>
-          <el-checkbox v-model="state.checked" @change="!state.checked">下次自动登录</el-checkbox>
-        </el-form-item>
-      </el-form>
+      </van-form>
+    </div>
+    <div v-else class="login-body register">
+      <van-form @submit="onSubmit">
+        <van-field
+          v-model="state.username1"
+          name="username1"
+          label="用户名"
+          placeholder="用户名"
+          :rules="[{ required: true, message: '请填写用户名' }]"
+        />
+        <van-field
+          v-model="state.password1"
+          type="password"
+          name="password1"
+          label="密码"
+          placeholder="密码"
+          :rules="[{ required: true, message: '请填写密码' }]"
+        />
+        <van-field
+          center
+          clearable
+          label="验证码"
+          placeholder="输入验证码"
+          v-model="state.verify"
+        >
+          <template #button>
+            <vue-img-verify ref="verifyRef" />
+          </template>
+        </van-field>
+        <div style="margin: 16px">
+          <div class="link-login" @click="toggle('login')">已有登录账号</div>
+          <van-button round block color="#1baeae" native-type="submit"
+            >注册</van-button
+          >
+        </div>
+      </van-form>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import axios from '../utils/axios'
-import { reactive, ref } from 'vue'
-import { ElMessage, type FormInstance } from 'element-plus';
-const loginForm = ref<FormInstance>()
+import { login, register } from "../server/User";
+import vueImgVerify from "../components/ImageVerify.vue";
+import { reactive, ref } from "vue";
+import { Toast } from "vant";
+import md5 from "js-md5";
+type User = {
+  username: string;
+  password: string;
+};
+const verifyRef = ref();
 const state = reactive({
-  ruleForm: {
-    username: '',
-    password: ''
-  },
-  checked: true,
-  rules: {
-    username: [
-      { required: 'true', message: '账户不能为空', trigger: 'blur' }
-    ],
-    password: [
-      { required: 'true', message: '密码不能为空', trigger: 'blur' }
-    ]
+  username: "",
+  password: "",
+  username1: "",
+  password1: "",
+  type: "login",
+  imgCode: "",
+  verify: "",
+});
+// 切换登录和注册两种模式
+const toggle = (v: string) => {
+  state.type = v;
+  state.verify = "";
+};
+// 提交登录或注册表单
+const onSubmit = async (values: User) => {
+  // console.log("verifyRef.value.imgCode", verifyRef.value.imgCode);
+  // state.imgCode = verifyRef.value.imgCode || "";
+  // if (state.verify.toLowerCase() != state.imgCode.toLowerCase()) {
+  //   Toast.fail("验证码有误");
+  //   return;
+  // }
+  if (state.type == "login") {
+    const { data } = await login({
+      loginName: values.username,
+      passwordMd5: md5(values.password),
+    });
+    localStorage.setItem("token", data);
+  } else {
+    await register({
+      loginName: values.username,
+      passwordMd5: md5(values.password),
+    });
+    Toast.success("注册成功");
+    state.type = "login";
+    state.verify = "";
   }
-})
-const submitForm = async () => {
-  loginForm?.value?.validate((valid) => {
-    if (valid) {
-      axios.post('/adminUser/login', {
-        userName: state.ruleForm.username || '',
-        passwordMd5: state.ruleForm.password || ''
-      }).then(res => {
-        localStorage.setItem('token', res + "");
-        ElMessage({
-          message: "登录成功",
-          grouping: true,
-          type: "success",
-      });
-      })
-    } else {
-      console.log('error submit!!')
-      return false;
-    }
-  })
-}
-
+};
 </script>
-<style scoped>
-.login-body {
-   display: flex;
-   justify-content: center;
-
-   align-items: center;
-   width: 100%;
-   height: 100%;
-   background-color: #fff;
- }
-
- .login-container {
-   width: 420px;
-   height: 500px;
-   background-color: #fff;
-   border-radius: 4px;
-   box-shadow: 0px 21px 41px 0px rgba(0, 0, 0, 0.2);
- }
-
- .head {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   padding: 40px 0 20px 0;
- }
-
- .head img {
-   width: 100px;
-   height: 100px;
-   margin-right: 20px;
- }
-
- .head .title {
-   font-size: 28px;
-   color: #1BAEAE;
-   font-weight: bold;
- }
-
- .head .tips {
-   font-size: 12px;
-   color: #999;
- }
-
- .login-form {
-   width: 70%;
-   margin: 0 auto;
- }
-
-
+<style lang="less" scoped>
+.login {
+  @media screen {
+  }
+  .logo {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 80px auto 20px;
+  }
+  .login-body {
+    padding: 0 20px;
+  }
+  .login {
+    .link-register {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #1989fa;
+      display: inline-block;
+    }
+  }
+  .register {
+    .link-login {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #1989fa;
+      display: inline-block;
+    }
+  }
+  .verify-bar-area {
+    margin-top: 24px;
+    .verify-left-bar {
+      border-color: #1baeae;
+    }
+    .verify-move-block {
+      background-color: #1baeae;
+      color: #fff;
+    }
+  }
+  .verify {
+    > div {
+      width: 100%;
+    }
+    display: flex;
+    justify-content: center;
+    .cerify-code-panel {
+      margin-top: 16px;
+    }
+    .verify-code {
+      width: 40% !important;
+      float: left !important;
+    }
+    .verify-code-area {
+      float: left !important;
+      width: 54% !important;
+      margin-left: 14px !important;
+      .varify-input-code {
+        width: 90px;
+        height: 38px !important;
+        border: 1px solid #e9e9e9;
+        padding-left: 10px;
+        font-size: 16px;
+      }
+      .verify-change-area {
+        line-height: 44px;
+      }
+    }
+  }
+}
 </style>
