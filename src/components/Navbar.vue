@@ -2,11 +2,11 @@
     <div class="Navbar">
         <ul class="nav-list">
             <router-link class="nav-list-item " to="home">
-                <i class="nbicon"></i>
+                <van-icon name="wap-home-o" />
                 <span>首页</span>
             </router-link>
             <router-link class="nav-list-item" to="category">
-                <i class="nbicon "></i>
+                <van-icon name="ellipsis" />
                 <span>分类</span>
             </router-link>
             <router-link class="nav-list-item" to="cart">
@@ -14,7 +14,7 @@
                 <span>购物车</span>
             </router-link>
             <router-link class="nav-list-item" to="user">
-                <i class="nbicon "></i>
+                <van-icon name="contact" />
                 <span>我的</span>
             </router-link>
         </ul>
@@ -24,6 +24,7 @@
 import { onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import {useCounterStore} from '../stores/counter'
+
 const route = useRoute()
 const state = useCounterStore()
 onMounted(() => {
@@ -58,7 +59,10 @@ const count = computed(() => {
           flex: 1;
           flex-direction: column;
           text-align: center;
-          color: #666;}
+          color: #666;
+          :deep(van-icon) {
+             font-size: large;
+          }}
       }
     }
 </style>
