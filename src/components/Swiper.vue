@@ -29,5 +29,6 @@ const goTo=(url :string)=>{
         height: 100%;
     }
 }
+
 </style>
   
