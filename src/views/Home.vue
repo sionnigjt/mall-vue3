@@ -28,7 +28,7 @@
 </template>
 <script lang="ts" setup>
 import { Toast } from 'vant';
-import { reactive, onMounted } from 'vue'
+import { reactive, onBeforeMount } from 'vue'
 import NavBar from '../components/Navbar.vue'
 import Swiper from "../components/Swiper.vue";
 import GoodsList from "../components/GoodsList.vue"
@@ -73,7 +73,7 @@ let HomeSate = reactive<HomeSateType>({
   hotGoodses: [<GoodsType>{}]
 })
 //通过生命周期函数请求数据
-onMounted(async () => {
+onBeforeMount(async () => {
   const { data } = await getHome()
   HomeSate.swiperList = data.carousels
   //  console.log(swiperList);
