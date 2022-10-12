@@ -30,7 +30,7 @@ const state = useCounterStore()
 onMounted(() => {
     const token = localStorage.getItem('token')
     const path = route.path
-    if (token && !['/home', '/category'].includes(path)) {
+    if (token &&['/home'].includes(path)) {
         state.UpdateCartCount()
     }
 })
@@ -60,9 +60,21 @@ const count = computed(() => {
           flex-direction: column;
           text-align: center;
           color: #666;
-          :deep(van-icon) {
-             font-size: large;
-          }}
+          &.router-link-active {
+            color: #1baeae;
+          }
+          i {
+            text-align: center;
+            font-size: 22px;
+          }
+          span{
+            font-size: 12px;
+          }
+          .van-icon-shopping-cart-o {
+            margin: 0 auto;
+            margin-bottom: 2px;
+          }
+        }
       }
     }
 </style>

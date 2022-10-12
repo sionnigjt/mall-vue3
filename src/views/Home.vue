@@ -5,7 +5,7 @@
         <van-icon name="wap-nav" />
       </router-link>
       <div class="header-search">
-        <span class="app-name">新蜂商城</span>
+        <span class="app-name">商城</span>
         <i class="iconfont icon-search"></i>
         <router-link tag="span" class="search-title" to="./product-list?from=home">山河无恙，人间皆安</router-link>
       </div>
@@ -34,7 +34,6 @@ import Swiper from "../components/Swiper.vue";
 import GoodsList from "../components/GoodsList.vue"
 import { getHome } from '../server/Home'
 import { categoryListData, swiperListData } from '../stores/data'
-import { truthProp } from 'vant/lib/utils';
 type carousels = {
   carouselUrl: string,
   redirectUrl: string

@@ -7,7 +7,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // const loder_pxtovw = pxtoViePort({
 //   unitToConvert: "px",
-//   viewportWidth: 10000,
+//   viewportWidth: 750,
 //   viewportUnit: "vw",
 // });
 export default defineConfig({

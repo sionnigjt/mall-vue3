@@ -1,3 +1,4 @@
+<!-- Home页面展示的列表 -->
 <template>
     <div class="good">
         <header class="good-header">{{nameInfo}}</header>

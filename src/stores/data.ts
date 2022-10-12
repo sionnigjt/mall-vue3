@@ -1,3 +1,4 @@
+//默认数据
 const categoryListData = [
   {
     name: "新蜂超市",
