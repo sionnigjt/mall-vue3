@@ -1,6 +1,10 @@
 <template>
   <div class="ProductDetail">
-    <!-- <s-header :name="'商品详情'"></s-header> -->
+    <SlotHeader>
+      <template v-slot:main>
+        <div>商品详情</div>
+      </template>
+    </SlotHeader>
     <div class="detail-content">
       <div class="detail-swipe-wrap">
         <van-swipe class="my-swipe" indicator-color="#1baeae">
@@ -41,6 +45,7 @@
 import { reactive, watch, computed, ref, onActivated } from 'vue'
 import { useRoute } from 'vue-router';
 import { getDetail } from '../server/Goods'
+import SlotHeader from '../components/SlotHeader.vue'
 let route = useRoute()
 let DetailSate = reactive({
   detail: <ProductDetailType>{},
@@ -61,7 +66,7 @@ onActivated(async () => {
 })
 </script>
 <style lang="less" scoped>
-.ProductDetail {
+.ProductDetail{
   .detail-content {
     height: calc(100vh - 50px);
     overflow: hidden;

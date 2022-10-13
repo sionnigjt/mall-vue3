@@ -32,7 +32,7 @@ const router = createRouter({
 const routeList=["/","/home","/login"]
 router.beforeEach((to,from,next)=>{
   
-  if (!(routeList.includes(to.path)||localStorage.getItem('token'))) {
+  if (!(routeList.includes(to.path)||localStorage.getItem('token')!=null)) {
     next({
       name:'login'
     })
