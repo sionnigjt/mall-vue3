@@ -31,8 +31,8 @@ const router = createRouter({
 })
 const routeList=["/","/home","/login"]
 router.beforeEach((to,from,next)=>{
-  console.log(!routeList.includes(to.path));
-  if (!routeList.includes(to.path)) {
+  
+  if (!(routeList.includes(to.path)||localStorage.getItem('token'))) {
     next({
       name:'login'
     })

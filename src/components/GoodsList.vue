@@ -19,14 +19,7 @@
 import { reactive, watch, computed, ref } from 'vue'
 import { useRouter } from 'vue-router';
 const router=useRouter()
-type GoodsType = {
-    goodsId: number,
-    goodsName: string,
-    goodsIntro: string,
-    goodsCoverImg: string,
-    sellingPrice: number,
-    tag: string
-}
+
 let props = defineProps<{
     loading: boolean,
     Goods:Array<GoodsType>,

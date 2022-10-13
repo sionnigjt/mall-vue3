@@ -33,7 +33,7 @@ import NavBar from '../components/Navbar.vue'
 import Swiper from "../components/Swiper.vue";
 import GoodsList from "../components/GoodsList.vue"
 import { getHome } from '../server/Home'
-import { categoryListData, swiperListData } from '../stores/data' 
+import { categoryListData, swiperListData } from '../stores/data'
 
 let HomeSate = reactive<HomeSateType>({
   swiperList: swiperListData,
@@ -41,18 +41,18 @@ let HomeSate = reactive<HomeSateType>({
   headerScroll: false,
   isLogin: false,
   categoryList: categoryListData,
-  loading:true,
+  loading: true,
   newGoodses: [<GoodsType>{}],
   hotGoodses: [<GoodsType>{}]
 })
 //通过生命周期函数请求数据
 //动态更新
-onActivated(async ()=>{
+onActivated(async () => {
   const { data } = await getHome()
   HomeSate.swiperList = data.carousels
-  HomeSate.hotGoodses=data.hotGoodses
-  HomeSate.newGoodses=data.newGoodses
-  HomeSate.loading=false
+  HomeSate.hotGoodses = data.hotGoodses
+  HomeSate.newGoodses = data.newGoodses
+  HomeSate.loading = false
 })
 const tips = () => {
   Toast('敬请期待');

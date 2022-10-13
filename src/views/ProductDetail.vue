@@ -1,6 +1,6 @@
 <template>
   <div class="ProductDetail">
-    <s-header :name="'商品详情'"></s-header>
+    <!-- <s-header :name="'商品详情'"></s-header> -->
     <div class="detail-content">
       <div class="detail-swipe-wrap">
         <van-swipe class="my-swipe" indicator-color="#1baeae">
@@ -16,7 +16,6 @@
         <div class="product-desc">免邮费 顺丰快递</div>
         <div class="product-price">
           <span>¥{{ DetailSate.detail.sellingPrice || '' }}</span>
-          <!-- <span>库存203</span> -->
         </div>
       </div>
       <div class="product-intro">
@@ -39,10 +38,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, watch, computed, ref } from 'vue'
+import { reactive, watch, computed, ref, onActivated } from 'vue'
 import { useRoute } from 'vue-router';
-let route=useRoute()
-console.log(route.params.id,route);
+import { getDetail } from '../server/Goods'
+let route = useRoute()
 let DetailSate = reactive({
   detail: <ProductDetailType>{},
   count: 0,
@@ -56,6 +55,10 @@ const goToCart = () => {
 const goTo = () => {
 
 }
+onActivated(async () => {
+  let {data} = await getDetail(Number(route.params.id))
+  DetailSate.detail = data
+})
 </script>
 <style lang="less" scoped>
 .ProductDetail {
@@ -110,7 +113,8 @@ const goTo = () => {
       ul {
         width: 100%;
         margin: 10px 0;
-
+        display: flex;
+        justify-content: center;
         li {
           flex: 1;
           padding: 5px 0;

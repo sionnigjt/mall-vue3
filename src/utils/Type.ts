@@ -41,10 +41,10 @@ declare global {
         recommendGoodses: any;
       }
       
-      interface MyResponseType {
+      interface MyResponseType<T> {
         code: number;
         message: string;
-        data: dataType;
+        data: T;
       }
       interface ProductDetailType{
         goodsCarouselList:string,
