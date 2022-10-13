@@ -21,9 +21,22 @@ const router = createRouter({
       path:'/category',
       name: 'category',
       component: ()=> import('../views/Category.vue')
-    }
+    },{
+      path: '/product/:id',
+      name: 'product',
+      component: () => import('../views/ProductDetail.vue'),
+    },
   
   ]
 })
-
+const routeList=["/","/home","/login"]
+router.beforeEach((to,from,next)=>{
+  console.log(!routeList.includes(to.path));
+  if (!routeList.includes(to.path)) {
+    next({
+      name:'login'
+    })
+  }
+  else next()
+})
 export default router

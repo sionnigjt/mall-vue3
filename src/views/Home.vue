@@ -28,44 +28,17 @@
 </template>
 <script lang="ts" setup>
 import { Toast } from 'vant';
-import { reactive, onBeforeMount } from 'vue'
+import { reactive, onBeforeMount, onActivated } from 'vue'
 import NavBar from '../components/Navbar.vue'
 import Swiper from "../components/Swiper.vue";
 import GoodsList from "../components/GoodsList.vue"
 import { getHome } from '../server/Home'
-import { categoryListData, swiperListData } from '../stores/data'
-type carousels = {
-  carouselUrl: string,
-  redirectUrl: string
-}
-type categoryListType = {
-  name: string,
-  imgUrl: string,
-  categoryId: number
-}
-type GoodsType = {
-  goodsId: number,
-  goodsName: string,
-  goodsIntro: string,
-  goodsCoverImg: string,
-  sellingPrice: number,
-  tag: string
-}
-type HomeSateType = {
-  swiperList: Array<carousels>,
-  headerScroll: boolean,
-  isLogin: boolean,
-  categoryList: Array<categoryListType>,
-  loading: boolean,
-  newGoodses: Array<GoodsType>,
-  hotGoodses: Array<GoodsType>
-}
+import { categoryListData, swiperListData } from '../stores/data' 
 
 let HomeSate = reactive<HomeSateType>({
   swiperList: swiperListData,
   //透明情况
   headerScroll: false,
-  //是否登录
   isLogin: false,
   categoryList: categoryListData,
   loading:true,
@@ -73,10 +46,10 @@ let HomeSate = reactive<HomeSateType>({
   hotGoodses: [<GoodsType>{}]
 })
 //通过生命周期函数请求数据
-onBeforeMount(async () => {
+//动态更新
+onActivated(async ()=>{
   const { data } = await getHome()
   HomeSate.swiperList = data.carousels
-  //  console.log(swiperList);
   HomeSate.hotGoodses=data.hotGoodses
   HomeSate.newGoodses=data.newGoodses
   HomeSate.loading=false

@@ -4,7 +4,7 @@
         <header class="good-header">{{nameInfo}}</header>
         <van-skeleton title :row="3" :loading="loading">
             <div class="good-box">
-                <div class="good-item" v-for="item in Goods" :key="item.goodsId" @click="">
+                <div class="good-item" v-for="item in Goods" :key="item.goodsId" @click="EnterDetail(item.goodsId)">
                     <img :src="item.goodsCoverImg" alt="">
                     <div class="good-desc">
                         <div class="title">{{ item.goodsName }}</div>
@@ -17,6 +17,8 @@
 </template>
 <script lang="ts" setup>
 import { reactive, watch, computed, ref } from 'vue'
+import { useRouter } from 'vue-router';
+const router=useRouter()
 type GoodsType = {
     goodsId: number,
     goodsName: string,
@@ -30,6 +32,16 @@ let props = defineProps<{
     Goods:Array<GoodsType>,
     nameInfo?:string
 }>()
+const EnterDetail=(goodsId:number)=>{
+  router.push(
+    {
+      name:'product',
+      params:{
+        id:goodsId
+      }
+    }
+  )
+}
 </script>
 <style lang="less" scoped>
   .good {

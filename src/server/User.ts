@@ -1,8 +1,4 @@
 import axios from "../utils/axios";
-type User = {
-  loginName: string;
-  passwordMd5: string;
-};
 export function getUserInfo() {
   return axios.get("/user/info");
 }
@@ -11,7 +7,7 @@ export function EditUserInfo(params: any) {
   return axios.put("/user/info", params);
 }
 
-export function login(params: User) {
+export function login(params: LoginUser) {
   return axios.post("/user/login", params);
 }
 

@@ -44,12 +44,9 @@ import vueImgVerify from "../components/ImageVerify.vue";
 import { reactive, ref } from "vue";
 import { Toast } from "vant";
 import md5 from "js-md5";
-import { useRoute, useRouter } from "vue-router";
-type User = {
-  username: string;
-  password: string;
-};
-const router=useRouter()
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 const verifyRef = ref();
 const state = reactive({
   username: "",
@@ -79,8 +76,7 @@ const onSubmit = async (values: User) => {
       passwordMd5: md5(values.password),
     });
     localStorage.setItem("token", data);
-    // window.location.href='/'
-    router.push("/")
+    router.push("/home")
   } else {
     await register({
       loginName: values.username,

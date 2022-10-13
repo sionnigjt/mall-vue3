@@ -1,4 +1,4 @@
-
+//购物车的小点
 import { defineStore } from 'pinia'
 import {getCart} from '../server/Cart'
 export const useCounterStore = defineStore('main', {
