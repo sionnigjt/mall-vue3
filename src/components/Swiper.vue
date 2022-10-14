@@ -18,7 +18,7 @@ type listDate={
 const props = defineProps<listDate>()
 
 const goTo=(url :string)=>{
-    window.open(url)
+    // window.open(url)
 }
 </script>
   
@@ -26,7 +26,7 @@ const goTo=(url :string)=>{
 .my-swipe {
     img {
         width: 100%;
-        height: 176.637px;
+        height: 100%;
     }
 }
 
