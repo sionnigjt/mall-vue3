@@ -4,12 +4,14 @@
         <header class="good-header">{{nameInfo}}</header>
         <van-skeleton title :row="3" :loading="loading">
             <div class="good-box">
+              
                 <div class="good-item" v-for="item in Goods" :key="item.goodsId" @click="EnterDetail(item.goodsId)">
-                    <img :src="item.goodsCoverImg" alt="">
+                    <img :src="item.goodsCoverImg" alt=""  >
                     <div class="good-desc">
                         <div class="title">{{ item.goodsName }}</div>
                         <div class="price">¥ {{ item.sellingPrice }}</div>
                     </div>
+                 
                 </div>
             </div>
         </van-skeleton>
@@ -25,6 +27,7 @@ let props = defineProps<{
     Goods:Array<GoodsType>,
     nameInfo?:string
 }>()
+
 const EnterDetail=(goodsId:number)=>{
   router.push(
     {

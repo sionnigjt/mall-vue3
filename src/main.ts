@@ -32,6 +32,7 @@ import {
   SubmitBar,
   Toast,
   Skeleton,
+  Lazyload,
 } from "vant";
 import "vant/lib/index.css";
 import App from "./App.vue";
@@ -71,7 +72,11 @@ app
   .use(SubmitBar)
   .use(Checkbox)
   .use(CheckboxGroup)
-  .use(Skeleton);
+  .use(Skeleton)
+  .use(Lazyload);
+app.use(Lazyload, {
+  lazyComponent: true,
+});
 
 app.use(createPinia());
 app.use(router);

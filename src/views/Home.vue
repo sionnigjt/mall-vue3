@@ -41,7 +41,7 @@ let HomeSate = reactive<HomeSateType>({
   headerScroll: false,
   isLogin: false,
   categoryList: categoryListData,
-  loading: false,
+  loading: true,
   newGoodses: [<GoodsType>{}],
   hotGoodses: [<GoodsType>{}]
 })

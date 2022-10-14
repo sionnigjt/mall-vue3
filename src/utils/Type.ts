@@ -57,6 +57,15 @@ declare global {
         sellingPrice:number,
         tag:string
       }
+      interface CartListType{
+        cartItemId:number,
+        goodsCount:number,
+        goodsCoverImg:string,
+        goodsId:number,
+        goodsName:string,
+        sellingPrice:number
+
+      }
   }
   
   export {};
