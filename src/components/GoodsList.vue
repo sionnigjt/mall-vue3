@@ -62,6 +62,7 @@ const EnterDetail=(goodsId:number)=>{
         img {
           display: block;
           width: 120px;
+          height: 126px;
           margin: 0 auto;
         }
         .good-desc {

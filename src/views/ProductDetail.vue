@@ -42,7 +42,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { reactive, watch, computed, ref, onActivated } from 'vue'
+import { reactive, watch, computed, ref, onActivated, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
 import { getDetail } from '../server/Goods'
 import SlotHeader from '../components/SlotHeader.vue'
@@ -60,7 +60,7 @@ const goToCart = () => {
 const goTo = () => {
 
 }
-onActivated(async () => {
+onMounted(async () => {
   let {data} = await getDetail(Number(route.params.id))
   DetailSate.detail = data
 })

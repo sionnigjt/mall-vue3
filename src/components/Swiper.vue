@@ -1,7 +1,7 @@
 <template>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#1baeae" :touchable="true">
         <van-swipe-item v-for="(item, index) in list" :key="index">
-                <img :src="item.carouselUrl" alt="" @click="goTo(item.redirectUrl)">
+                <img  :src="item.carouselUrl" alt="" @click="goTo(item.redirectUrl)" >
         </van-swipe-item>
     </van-swipe>
 </template>
@@ -26,7 +26,7 @@ const goTo=(url :string)=>{
 .my-swipe {
     img {
         width: 100%;
-        height: 100%;
+        height: 177px;
     }
 }
 

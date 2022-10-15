@@ -28,7 +28,7 @@
 </template>
 <script lang="ts" setup>
 import { Toast } from 'vant';
-import { reactive, onBeforeMount, onActivated } from 'vue'
+import { reactive, onBeforeMount, onActivated, onMounted } from 'vue'
 import NavBar from '../components/Navbar.vue'
 import Swiper from "../components/Swiper.vue";
 import GoodsList from "../components/GoodsList.vue"
@@ -48,6 +48,13 @@ let HomeSate = reactive<HomeSateType>({
 //通过生命周期函数请求数据
 //动态更新
 onActivated(async () => {
+  const { data } = await getHome()
+  HomeSate.swiperList = data.carousels
+  HomeSate.hotGoodses = data.hotGoodses
+  HomeSate.newGoodses = data.newGoodses
+  HomeSate.loading = false
+})
+onMounted(async () => {
   const { data } = await getHome()
   HomeSate.swiperList = data.carousels
   HomeSate.hotGoodses = data.hotGoodses

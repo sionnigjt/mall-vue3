@@ -17,7 +17,8 @@ const goBack=()=>{
 </script>
 <style lang="less" scoped>
 &:deep(.icon-checkmore:before) {
-  font-size: x-large;
+  font-size:30px;
+  color: rgb(79, 81, 78);
 }
 
 .SlotHeader {

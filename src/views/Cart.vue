@@ -37,9 +37,10 @@
 </template>
 <script lang="ts" setup>
 import { Card } from 'vant';
-import { reactive, watch, computed, ref } from 'vue'
+import { reactive, watch, computed, ref, onMounted } from 'vue'
 import NavBar from '../components/Navbar.vue'
 import SlotHeader from '../components/SlotHeader.vue'
+import { getCart } from '../server/Cart'
 const CartSate = reactive({
     list: [<CartListType>{}]
 })
@@ -55,71 +56,80 @@ const allCheck = () => {
 const checkAll = () => {
 
 }
+onMounted(async () => {
+    let { data } = await getCart();
+    CartSate.list = data;
+    console.log(CartSate.list);
+})
 </script>
 <style lang="less" scoped>
-.cart-body {
-    margin: 16px 0 100px 0;
-    padding-left: 10px;
+.Cart {
+    height: 100vh;
+    .cart-body {
+        margin: 16px 0 100px 0;
+        padding-left: 10px;
 
-    .good-item {
-        display: flex;
-
-        .good-img {
-            img {
-                width: 100%;
-                height: 100%;
-            }
-        }
-
-        .good-desc {
+        .good-item {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            flex: 1;
-            padding: 20px;
 
-            .good-title {
-                display: flex;
-                justify-content: space-between;
+            .good-img {
+                img {
+                    width: 105px;
+                    height: 105px;
+                }
             }
 
-            .good-btn {
+            .good-desc {
                 display: flex;
+                flex-direction: column;
                 justify-content: space-between;
+                flex: 1;
+                padding: 20px;
 
-                .price {
-                    font-size: 16px;
-                    color: red;
-                    line-height: 28px;
+                .good-title {
+                    display: flex;
+                    justify-content: space-between;
                 }
 
-                .van-icon-delete {
-                    font-size: 20px;
-                    margin-top: 4px;
+                .good-btn {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .price {
+                        font-size: 16px;
+                        color: red;
+                        line-height: 28px;
+                    }
+
+                    .van-icon-delete {
+                        font-size: 20px;
+                        margin-top: 4px;
+                    }
                 }
             }
         }
+
+        .delete-button {
+            width: 50px;
+            height: 100%;
+        }
     }
 
-    .delete-button {
-        width: 50px;
-        height: 100%;
-    }
-}
+    .submit-all {
+        margin-bottom: 50px;
 
-.submit-all {
-    margin-bottom: 50px;
+        .van-checkbox {
+            margin-left: 10px
+        }
 
-    .van-checkbox {
-        margin-left: 10px
+        .van-submit-bar__text {
+            margin-right: 10px
+        }
+
+        .van-submit-bar__button {
+            background: #1baeae;
+        }
     }
 
-    .van-submit-bar__text {
-        margin-right: 10px
-    }
-
-    .van-submit-bar__button {
-        background: #1baeae;
-    }
 }
 </style>

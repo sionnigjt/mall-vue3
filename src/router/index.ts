@@ -16,11 +16,17 @@ const router = createRouter({
     {
       path:'/home',
       name: 'home',
-      component: ()=> import('../views/Home.vue')
+      component: ()=> import('../views/Home.vue'),
+      meta:{
+        keepAlive:true
+      }
     },{
       path:'/category',
       name: 'category',
-      component: ()=> import('../views/Category.vue')
+      component: ()=> import('../views/Category.vue'),
+      meta:{
+        keepAlive:true
+      }
     },{
       path: '/product/:id',
       name: 'product',
@@ -28,7 +34,10 @@ const router = createRouter({
     },{
       path:'/cart',
       name: 'cart',
-      component: ()=> import('../views/Cart.vue')
+      component: ()=> import('../views/Cart.vue'),
+      meta:{
+        keepAlive:true
+      }
     },
   
   ]

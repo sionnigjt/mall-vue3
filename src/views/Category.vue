@@ -7,6 +7,7 @@
         </div>
       </template>
     </SlotHeader>
+    143
     <NavBar></NavBar>
   </div>
 </template>
@@ -16,5 +17,7 @@ import NavBar from '../components/Navbar.vue'
 import SlotHeader from '../components/SlotHeader.vue'
 </script>
 <style lang="less" scoped>
-
+.Category{
+  height: 100vh;
+}
 </style>
