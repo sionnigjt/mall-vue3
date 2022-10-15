@@ -35,6 +35,10 @@ declare global {
     loginName: string;
     passwordMd5: string;
   };
+  type RegisterUser = {
+    loginName: string;
+    password: string;
+  };
   type dataType = {
     carousels: Array<swiperListData>;
     hotGoodses: Array<GoodsType> ;
@@ -73,6 +77,10 @@ declare global {
     goodsCount: number;
     goodsId: number;
   }
+  interface modifyCartType{
+    cartItemId: any;
+    goodsCount: any;
+}
 }
 
 export {};

@@ -15,6 +15,6 @@ export function logout() {
   return axios.post("/user/logout");
 }
 
-export function register(params: any) {
+export function register(params: RegisterUser) {
   return axios.post("/user/register", params);
 }

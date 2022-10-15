@@ -41,7 +41,15 @@ const router = createRouter({
       meta:{
         keepAlive:true
       }
+    },{
+      path:'/user',
+      name: 'user',
+      component: ()=> import('../views/User.vue'),
+      meta:{
+        keepAlive:true
+      }
     },
+  
   
   ]
 })

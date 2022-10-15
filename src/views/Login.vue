@@ -27,7 +27,7 @@
           :rules="[{ required: true, message: '请填写密码' }]" />
         <van-field center clearable label="验证码" placeholder="输入验证码" v-model="state.verify">
           <template #button>
-            <!-- <vue-img-verify ref="verifyRef" /> -->
+            <vue-img-verify ref="verifyRef" />
           </template>
         </van-field>
         <div style="margin: 16px">
@@ -80,7 +80,7 @@ const onSubmit = async (values: User) => {
   } else {
     await register({
       loginName: values.username,
-      passwordMd5: md5(values.password),
+      password:values.password
     });
     Toast.success("注册成功");
     state.type = "login";

@@ -2,7 +2,7 @@
   <div class="Home">
     <header class="home-header wrap" :class="{'active' :HomeSate.headerScroll}">
       <router-link tag="i" to="./category">
-        <van-icon name="wap-nav" />
+        <van-icon name="wap-nav" color="#1baeae" />
       </router-link>
       <div class="header-search">
         <span class="app-name">商城</span>
