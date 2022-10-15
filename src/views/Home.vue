@@ -7,7 +7,7 @@
       <div class="header-search">
         <span class="app-name">商城</span>
         <i class="iconfont icon-search"></i>
-        <router-link tag="span" class="search-title" to="./product-list?from=home">山河无恙，人间皆安</router-link>
+        <router-link tag="span" class="search-title" to="">山河无恙，人间皆安</router-link>
       </div>
       <router-link class="login" tag="span" to="./login" v-if="!HomeSate.isLogin">登录</router-link>
       <router-link class="login" tag="span" to="./user" v-else>
@@ -22,8 +22,10 @@
       </div>
     </div>
   </div>
-  <GoodsList :loading="HomeSate.loading" :Goods="HomeSate.newGoodses" :nameInfo="`最新商品`"></GoodsList>
-  <GoodsList :loading="HomeSate.loading" :Goods="HomeSate.hotGoodses" :nameInfo="`热门商品`"></GoodsList>
+    <GoodsList :loading="HomeSate.loading" :Goods="HomeSate.newGoodses" :nameInfo="`最新商品`"></GoodsList>
+    <GoodsList :loading="HomeSate.loading" :Goods="HomeSate.hotGoodses" :nameInfo="`热门商品`"></GoodsList>
+    <GoodsList :loading="HomeSate.loading" :Goods="HomeSate.recommendGoodses" :nameInfo="`推荐商品`"></GoodsList>
+ 
   <NavBar></NavBar>
 </template>
 <script lang="ts" setup>
@@ -43,22 +45,18 @@ let HomeSate = reactive<HomeSateType>({
   categoryList: categoryListData,
   loading: true,
   newGoodses: [<GoodsType>{}],
-  hotGoodses: [<GoodsType>{}]
+  hotGoodses: [<GoodsType>{}],
+  recommendGoodses: [<GoodsType>{}],
 })
 //通过生命周期函数请求数据
 //动态更新
 onActivated(async () => {
+  console.log(111);
   const { data } = await getHome()
   HomeSate.swiperList = data.carousels
   HomeSate.hotGoodses = data.hotGoodses
   HomeSate.newGoodses = data.newGoodses
-  HomeSate.loading = false
-})
-onMounted(async () => {
-  const { data } = await getHome()
-  HomeSate.swiperList = data.carousels
-  HomeSate.hotGoodses = data.hotGoodses
-  HomeSate.newGoodses = data.newGoodses
+  HomeSate.recommendGoodses=data.recommendGoodses
   HomeSate.loading = false
 })
 const tips = () => {

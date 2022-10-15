@@ -10,14 +10,13 @@
   </router-view>
 </template>
 <script setup lang="ts">
-import { reactive } from 'vue';
 import { RouterView, useRouter } from 'vue-router'
 
 </script>
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.18s ease;
 }
 
 .fade-enter-from,

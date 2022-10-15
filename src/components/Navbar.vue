@@ -21,13 +21,13 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { onMounted, computed } from 'vue'
+import { onMounted, computed, onActivated } from 'vue'
 import { useRoute } from 'vue-router'
 import {useCounterStore} from '../stores/counter'
 
 const route = useRoute()
 const state = useCounterStore()
-onMounted(() => {
+onActivated(async() => {
     const token = localStorage.getItem('token')
     const path = route.path
     if (token &&['/home'].includes(path)) {

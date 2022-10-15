@@ -46,13 +46,16 @@ import { reactive, watch, computed, ref, onActivated, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
 import { getDetail } from '../server/Goods'
 import SlotHeader from '../components/SlotHeader.vue'
+import { addCart } from '../server/Cart'
+import { Toast } from 'vant';
 let route = useRoute()
 let DetailSate = reactive({
   detail: <ProductDetailType>{},
   count: 0,
 })
-const handleAddCart = () => {
-
+const handleAddCart = async () => {
+  const { resultCode } = await addCart({ goodsCount: 1, goodsId: DetailSate.detail.goodsId })
+  if (resultCode == 200) Toast.success('添加成功')
 }
 const goToCart = () => {
 
@@ -60,13 +63,14 @@ const goToCart = () => {
 const goTo = () => {
 
 }
-onMounted(async () => {
-  let {data} = await getDetail(Number(route.params.id))
+onActivated(async () => {
+  console.log('11111');
+  let { data } = await getDetail(Number(route.params.id))
   DetailSate.detail = data
 })
 </script>
 <style lang="less" scoped>
-.ProductDetail{
+.ProductDetail {
   .detail-content {
     height: calc(100vh - 50px);
     overflow: hidden;
@@ -120,6 +124,7 @@ onMounted(async () => {
         margin: 10px 0;
         display: flex;
         justify-content: center;
+
         li {
           flex: 1;
           padding: 5px 0;

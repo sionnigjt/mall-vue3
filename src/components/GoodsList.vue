@@ -1,5 +1,6 @@
 <!-- Home页面展示的列表 -->
 <template>
+  <keep-alive>
     <div class="good">
         <header class="good-header">{{nameInfo}}</header>
         <van-skeleton title :row="3" :loading="loading">
@@ -16,6 +17,7 @@
             </div>
         </van-skeleton>
     </div>
+  </keep-alive>
 </template>
 <script lang="ts" setup>
 import { reactive, watch, computed, ref } from 'vue'
