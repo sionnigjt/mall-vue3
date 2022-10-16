@@ -65,7 +65,8 @@ const tips = () => {
 
 </script>
 <style lang="less" scoped>
-.home-header {
+.Home{
+  .home-header {
   position: fixed;
   left: 0;
   right: 0;
@@ -138,6 +139,8 @@ const tips = () => {
     }
   }
 }
+}
+
 
 .category-list {
   display: flex;

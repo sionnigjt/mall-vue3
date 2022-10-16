@@ -1,11 +1,12 @@
 
 <template>
    <router-view v-slot="{ Component, route }">
-    <transition name="fade">
-      <keep-alive v-if="route.meta.keepAlive">
-        <component :is="Component" />
+    <transition name="fade" >
+      <component :is="Component" v-if="route.meta.noKeepAlive" />
+      <keep-alive v-else>
+        <component :is="Component"  />
       </keep-alive>
-      <component :is="Component" v-else />
+  
     </transition>
   </router-view>
 </template>
@@ -16,7 +17,7 @@ import { RouterView, useRouter } from 'vue-router'
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.18s ease;
+  transition: opacity 0.9s ease;
 }
 
 .fade-enter-from,

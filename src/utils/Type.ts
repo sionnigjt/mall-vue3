@@ -25,7 +25,7 @@ declare global {
     loading: boolean;
     newGoodses: Array<GoodsType>;
     hotGoodses: Array<GoodsType>;
-    recommendGoodses:Array<GoodsType>;
+    recommendGoodses: Array<GoodsType>;
   };
   type User = {
     username: string;
@@ -41,14 +41,14 @@ declare global {
   };
   type dataType = {
     carousels: Array<swiperListData>;
-    hotGoodses: Array<GoodsType> ;
+    hotGoodses: Array<GoodsType>;
     newGoodses: Array<GoodsType>;
     recommendGoodses: any;
   };
-  type swiperListData= {
+  type swiperListData = {
     carouselUrl: string;
     redirectUrl: string;
-}
+  };
   interface MyResponseType<T> {
     resultCode: number;
     message: string;
@@ -77,10 +77,30 @@ declare global {
     goodsCount: number;
     goodsId: number;
   }
-  interface modifyCartType{
+  interface modifyCartType {
     cartItemId: any;
     goodsCount: any;
-}
+  }
+
+  interface OrderListType {
+    orderId: number;
+    orderNo: string;
+    totalPrice: number;
+    payType: number;
+    orderStatus: number;
+    orderStatusString: string;
+    createTime: string;
+    newBeeMallOrderItemVOS: Array<newBeeMallOrderItemVOS>;
+  }
+  type OrderListArrayType = Array<OrderListType>
+  interface newBeeMallOrderItemVOS {
+    orderId: number;
+    goodsId: number;
+    goodsCount: number;
+    goodsName: string;
+    goodsCoverImg: string;
+    sellingPrice: number;
+  }
 }
 
 export {};

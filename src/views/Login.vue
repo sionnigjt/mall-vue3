@@ -90,15 +90,15 @@ const onSubmit = async (values: User) => {
 </script>
 <style lang="less" scoped>
 .login {
-  @media screen and (min-width:1200px) {
-    width: 100vw;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  // @media screen and (min-width:1200px) {
+  //   width: 100vw;
+  //   height: 80vh;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
 
-    align-items: center;
-  }
+  //   align-items: center;
+  // }
 
   .logo {
     width: 120px;

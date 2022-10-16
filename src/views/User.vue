@@ -52,6 +52,8 @@ const goTo = (path: string) => {
 </script>
 <style lang="less" scoped>
 .User {
+  width: 100vw;
+  height: 100vh;
   .user-info {
     width: 94%;
     margin: 10px;
