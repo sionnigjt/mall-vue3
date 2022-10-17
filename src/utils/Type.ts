@@ -93,6 +93,13 @@ declare global {
     newBeeMallOrderItemVOS: Array<newBeeMallOrderItemVOS>;
   }
   type OrderListArrayType = Array<OrderListType>
+  interface  OrderDataType{
+    currPage:number,
+    list:OrderListArrayType,
+    pageSize:number
+    totalCount:number,
+    totalPage:number,
+  }
   interface newBeeMallOrderItemVOS {
     orderId: number;
     goodsId: number;

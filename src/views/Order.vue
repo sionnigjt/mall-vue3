@@ -4,47 +4,39 @@
         </SlotHeader>
         <van-tabs :swipeable="true" :duration="0.3" @click="onChangeTab" :color="'#1baeae'"
             :title-active-color="'#1baeae'" class="order-tab">
-            <van-tab title="全部" name=''>
-                <OrderList :list="OrderState.list"></OrderList>
-            </van-tab>
-            <van-tab title="待付款" name="0">2</van-tab>
-            <van-tab title="待确认" name="1">3</van-tab>
-            <van-tab title="待发货" name="2">4</van-tab>
-            <van-tab title="已发货" name="3">2</van-tab>
-            <van-tab title="交易完成" name="4">4</van-tab>
+            <div v-for="item,id in OrderState.tabValue ">
+                <van-tab :title="item.title" :name='id'>
+                    <OrderList :list="OrderState.list[id]"></OrderList>
+                </van-tab>
+            </div>
         </van-tabs>
     </div>
 </template>
 <script lang="ts" setup>
-import { reactive, watch, computed, ref } from 'vue'
+import { reactive, watch, computed, ref, onActivated } from 'vue'
 import SlotHeader from '../components/SlotHeader.vue'
 import OrderList from '../components/OrderList.vue'
+import { OderTabData } from '../stores/data'
+import { getOrderList } from '../server/Oder'
 const OrderState = reactive({
-    list:[<OrderListType>{}],
-    status: ''
+    list: [[<OrderListType>{}]],
+    status: '',
+    tabValue: OderTabData
 })
-OrderState.list=   [{
-            orderId: 21526,
-            orderNo: "16659202004377776",
-            totalPrice: 18999,
-            payType: 1,
-            orderStatus: 1,
-            orderStatusString: "已支付",
-            createTime: "2022-10-16 19:36:40",
-            newBeeMallOrderItemVOS: [
-                {
-                    orderId:0,
-                    goodsId: 10920,
-                    goodsCount: 1,
-                    goodsName: "MacBook Pro 16英寸 M1 Pro芯片",
-                    goodsCoverImg: "https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/mbp16-silver-select-202110_GEO_CN.jpeg",
-                    sellingPrice: 18999
-                }
-            ]
-        }]
 const onChangeTab = () => {
 
 }
+onActivated(async () => {
+    console.log(11244);
+    for (let index = 0; index < OrderState.tabValue.length; index++) {
+        let { data } = await getOrderList({
+            pageNumber: 1,
+            status: OrderState.tabValue[index].name
+        })
+        OrderState.list[index]=data?.list
+    }
+
+})
 </script>
 <style lang="less" scoped>
 .Order {

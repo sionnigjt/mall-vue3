@@ -1,7 +1,7 @@
 <template>
   <div class="OrderList">
-    <van-pull-refresh class="order-list-refresh">
-      <van-list finished-text="没有更多了">
+    <van-pull-refresh class="order-list-refresh" >
+      <van-list finished-text="没有更多了" :finished="finished">
         <div v-for="(item, index) in list" :key="index" class="order-item-box" @click="goTo(item.orderNo)">
           <div class="order-item-header">
             <span>订单时间：{{ item.createTime }}</span>
@@ -12,6 +12,7 @@
         </div>
       </van-list>
     </van-pull-refresh>
+
   </div>
 </template>
 <script lang="ts" setup>
@@ -23,6 +24,8 @@ const props = defineProps<{
   list?: OrderListArrayType,
 
 }>()
+let finished=ref(false)
+finished.value=props.list?false:true
 const goTo=(id:string)=>[
 router.push("/product/"+id)
 ]

@@ -17,7 +17,7 @@ import { RouterView, useRouter } from 'vue-router'
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.9s ease;
+  transition: opacity 0.3s ease;
 }
 
 .fade-enter-from,

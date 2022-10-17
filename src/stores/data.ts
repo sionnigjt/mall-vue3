@@ -52,18 +52,47 @@ const categoryListData = [
     categoryId: 100010,
   },
 ];
-const  swiperListData=[
+const swiperListData = [
   {
-      carouselUrl: "https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-p50-pocket.png",
-      redirectUrl: "https://juejin.im/book/6844733826191589390"
+    carouselUrl:
+      "https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-p50-pocket.png",
+    redirectUrl: "https://juejin.im/book/6844733826191589390",
   },
   {
-      carouselUrl: "https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-iphone13.png",
-      redirectUrl: "https://juejin.im/book/6844733826191589390"
+    carouselUrl:
+      "https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-iphone13.png",
+    redirectUrl: "https://juejin.im/book/6844733826191589390",
   },
   {
-      carouselUrl: "https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-mate40.png",
-      redirectUrl: "https://juejin.im/book/6844733826191589390"
-  }
-]
-export { categoryListData,swiperListData };
+    carouselUrl:
+      "https://newbee-mall.oss-cn-beijing.aliyuncs.com/images/banner-mate40.png",
+    redirectUrl: "https://juejin.im/book/6844733826191589390",
+  },
+];
+const OderTabData = [
+  {
+    title: "全部",
+    name:""
+  },
+  {
+    title: "待付款",
+    name:"0"
+  },
+  {
+    title: "待确认",
+    name:"1"
+  },
+  {
+    title: "待发货",
+    name:"2"
+  },
+  {
+    title: "交易完成",
+    name:"3"
+  },
+  {
+    title: "已发货",
+    name:"4"
+  },
+];
+export { categoryListData, swiperListData ,OderTabData};
