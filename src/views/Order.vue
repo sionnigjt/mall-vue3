@@ -1,6 +1,9 @@
 <template>
     <div class="Order">
         <SlotHeader>
+            <template v-slot:main>
+                <div>订单</div>
+            </template>
         </SlotHeader>
         <van-tabs :swipeable="true" :duration="0.3" @click="onChangeTab" :color="'#1baeae'"
             :title-active-color="'#1baeae'" class="order-tab">
@@ -44,7 +47,7 @@ onActivated(async () => {
 .Order {
     width: 100vw;
     height: 100vh;
-
+    
   
 
 }

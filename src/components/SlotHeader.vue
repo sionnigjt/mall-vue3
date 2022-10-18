@@ -23,7 +23,7 @@ const goBack = () => {
   font-size: 30px;
   color: rgb(79, 81, 78);
 }
-
+//占位
 .SlotHeader {
   width: 100vw;
   height: 65px;
@@ -34,10 +34,11 @@ const goBack = () => {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 254, 254);
   width: 100vw;
   line-height: 50px;
   position: fixed;
+  z-index: 1000;
   left: 0;
 
   .slotMain {

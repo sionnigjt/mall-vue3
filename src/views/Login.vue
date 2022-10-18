@@ -1,6 +1,11 @@
 <template>
   <div class="login">
-    <!-- <s-header :name="type == 'login' ? '登录' : '注册'" :back="'/home'"></s-header> -->
+  
+   <SlotHeader>
+    <template v-slot:main>
+                <div>登录</div>
+            </template>
+   </SlotHeader>
     <img class="logo" src="https://s.yezgea02.com/1604045825972/newbee-mall-vue3-app-logo.png" alt="" />
     <div v-if="state.type == 'login'" class="login-body login">
       <van-form @submit="onSubmit">
@@ -45,7 +50,7 @@ import { reactive, ref } from "vue";
 import { Toast } from "vant";
 import md5 from "js-md5";
 import { useRouter } from "vue-router";
-
+import SlotHeader from '../components/SlotHeader.vue'
 const router = useRouter()
 const verifyRef = ref();
 const state = reactive({
@@ -91,8 +96,9 @@ const onSubmit = async (values: User) => {
 <style lang="less" scoped>
 .login {
   // @media screen and (min-width:1200px) {
-  //   width: 100vw;
-  //   height: 80vh;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
   //   display: flex;
   //   flex-direction: column;
   //   justify-content: center;

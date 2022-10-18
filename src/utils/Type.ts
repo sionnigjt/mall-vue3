@@ -108,6 +108,10 @@ declare global {
     goodsCoverImg: string;
     sellingPrice: number;
   }
+  type saveOrderParamsType={
+    addressId:number,
+    cartItemIds:Array<number>
+  }
 }
 
 export {};

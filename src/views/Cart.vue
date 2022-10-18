@@ -42,7 +42,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { Card } from 'vant'
+import { Card, Toast } from 'vant'
 import { reactive, watch, computed, ref, onMounted, onActivated } from 'vue'
 import { useRouter } from 'vue-router'
 import NavBar from '../components/Navbar.vue'
@@ -70,7 +70,6 @@ const watchChange = (result: Array<number>) => {
         CartSate.checkAll = true
     }
     if (result.length < CartSate.list.length) {
-        console.log(222);
         CartSate.checkAll = false
     }
     CartSate.result = result
@@ -107,6 +106,12 @@ const onChange = async (count: number, id: { name: number }) => {
     }
 }
 const onSubmit = () => {
+    if (CartSate.result.length == 0) {
+        Toast.fail('请选择商品进行结算')
+        return
+      }
+      const params = JSON.stringify(CartSate.result)
+      router.push({ path: '/createOrder', query: { cartItemIds: params } })
 
 }
 const allCheck = () => {
@@ -120,8 +125,7 @@ const allCheck = () => {
 }
 
 const isShow=()=>{
-    if (CartSate.result[0]==0||CartSate.result.length==0) {
-  
+    if (CartSate.result[0]==0||CartSate.list.length==0) {
         return false
     }
    else return true
