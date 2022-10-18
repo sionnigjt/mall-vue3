@@ -1,6 +1,9 @@
 <template>
   <div class="User">
-    <SlotHeader></SlotHeader>
+    <SlotHeader> 
+      <template v-slot:main>
+        <div>个人中心</div>
+      </template></SlotHeader>
     <van-skeleton title :avatar="true" :row="3" :loading="userState.loading">
       <div class="user-info">
         <div class="info">
@@ -54,6 +57,7 @@ const goTo = (path: string) => {
 .User {
   width: 100vw;
   height: 100vh;
+
   .user-info {
     width: 94%;
     margin: 10px;

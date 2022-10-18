@@ -1,8 +1,7 @@
 <template>
   <div class="OrderList">
-    <van-pull-refresh class="order-list-refresh" >
       <van-list finished-text="没有更多了" :finished="finished">
-        <div v-for="(item, index) in list" :key="index" class="order-item-box" @click="goTo(item.orderNo)">
+        <div v-for="(item, index) in list" :key="index" class="order-item-box" @click="goTo(item.orderId)">
           <div class="order-item-header">
             <span>订单时间：{{ item.createTime }}</span>
             <span>{{ item.orderStatusString }}</span>
@@ -11,7 +10,7 @@
             :price="one.sellingPrice" desc="全场包邮" :title="one.goodsName" :thumb="one.goodsCoverImg" />
         </div>
       </van-list>
-    </van-pull-refresh>
+
 
   </div>
 </template>
@@ -26,12 +25,13 @@ const props = defineProps<{
 }>()
 let finished=ref(false)
 finished.value=props.list?false:true
-const goTo=(id:string)=>[
+const goTo=(id:number)=>[
 router.push("/product/"+id)
 ]
 </script>
 <style lang="less" scoped>
-   .order-list-refresh {
+
+   .OrderList{
       .van-card__content {
         display: flex;
         flex-direction: column;

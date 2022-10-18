@@ -16,12 +16,13 @@
 import { reactive, watch, computed, ref, onActivated } from 'vue'
 import SlotHeader from '../components/SlotHeader.vue'
 import OrderList from '../components/OrderList.vue'
-import { OderTabData } from '../stores/data'
+import { OrderTabData } from '../stores/data'
 import { getOrderList } from '../server/Oder'
+type OrderStateListType = Array<OrderListArrayType> 
 const OrderState = reactive({
-    list: [[<OrderListType>{}]],
+    list:<OrderStateListType>[],
     status: '',
-    tabValue: OderTabData
+    tabValue: OrderTabData
 })
 const onChangeTab = () => {
 
@@ -33,9 +34,10 @@ onActivated(async () => {
             pageNumber: 1,
             status: OrderState.tabValue[index].name
         })
-        OrderState.list[index]=data?.list
+        if (data.list.length > 0) {
+            OrderState.list[index] = data.list
+        }
     }
-
 })
 </script>
 <style lang="less" scoped>
@@ -43,13 +45,7 @@ onActivated(async () => {
     width: 100vw;
     height: 100vh;
 
-    .order-tab {
-        position: fixed;
-        left: 0;
-        z-index: 1000;
-        width: 100vw;
-        border-bottom: 1px solid #e9e9e9;
+  
 
-    }
 }
 </style>

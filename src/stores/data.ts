@@ -69,7 +69,7 @@ const swiperListData = [
     redirectUrl: "https://juejin.im/book/6844733826191589390",
   },
 ];
-const OderTabData = [
+const OrderTabData = [
   {
     title: "全部",
     name:""
@@ -95,4 +95,4 @@ const OderTabData = [
     name:"4"
   },
 ];
-export { categoryListData, swiperListData ,OderTabData};
+export { categoryListData, swiperListData ,OrderTabData};
